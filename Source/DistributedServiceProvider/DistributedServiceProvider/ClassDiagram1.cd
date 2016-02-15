@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DistributedServiceProvider.DistributedRoutingTable">
+    <Position X="4.25" Y="0.75" Width="2.5" />
+    <Members>
+      <Method Name="AutoLink" Hidden="true" />
+      <Field Name="Configuration" Hidden="true" />
+      <Field Name="consumerLock" Hidden="true" />
+      <Field Name="consumers" Hidden="true" />
+      <Property Name="ContactCount" Hidden="true" />
+      <Field Name="contacts" Hidden="true" />
+      <Method Name="DistributedRoutingTable" Hidden="true" />
+      <Field Name="getClosest" Hidden="true" />
+      <Field Name="LocalContact" Hidden="true" />
+      <Field Name="LocalIdentifier" Hidden="true" />
+      <Field Name="MessageCallback" Hidden="true" />
+      <Field Name="NetworkId" Hidden="true" />
+      <Method Name="Refresh" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAECAQQAEABAAAAgAAAAIAAAAAAQAAKogAAAAIAAKAA=</HashCode>
+      <FileName>DistributedRoutingTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DistributedServiceProvider.Contacts.Contact">
+    <Position X="7" Y="0.75" Width="1.5" />
+    <Members>
+      <Method Name="Contact" Hidden="true" />
+      <Field Name="Identifier" Hidden="true" />
+      <Property Name="NetworkId" Hidden="true" />
+      <Field Name="networkIdBytes" Hidden="true" />
+      <Property Name="Table" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAQAAQIAA=</HashCode>
+      <FileName>Contacts\Contact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DistributedServiceProvider.MessageConsumers.MessageConsumer">
+    <Position X="8.75" Y="0.75" Width="3.25" />
+    <Members>
+      <Method Name="MessageConsumer" Hidden="true" />
+      <Property Name="RoutingTable" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAABAAAAAAAAAAAAAAAAAAAAAAAgIAAAABAA=</HashCode>
+      <FileName>MessageConsumers\MessageConsumer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

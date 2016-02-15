@@ -1,0 +1,18 @@
+Cannot access a disposed object.
+Object name: 'System.Net.Sockets.UdpClient'.
+Int32 Send(Byte[], Int32, System.Net.IPEndPoint)
+System
+   at System.Net.Sockets.UdpClient.Send(Byte[] dgram, Int32 bytes, IPEndPoint endPoint)
+   at peerTube.UdpFactory.Send(Byte[] dgram, IPEndPoint endpoint)
+   at peerTube.UdpProxy.Send(Contact source, Guid consumerId, Byte[] message, Boolean reliable, Boolean ordered, Int32 channel)
+   at DistributedServiceProvider.Contacts.ProxyContact.Send(Contact source, Guid consumerId, Byte[] message, Boolean reliable, Boolean ordered, Int32 channel)
+   at DistributedServiceProvider.MessageConsumers.GetClosestNodes.RemoteGetClosest(Contact local, Contact remote, Identifier512 target, Int32 limit, Int32 timeout)
+   at DistributedServiceProvider.MessageConsumers.GetClosestNodes.<>c__DisplayClass10.<GetClosestContacts>b__2(Contact c)
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+   at System.Collections.Generic.HashSet`1.UnionWith(IEnumerable`1 other)
+   at System.Collections.Generic.HashSet`1..ctor(IEnumerable`1 collection, IEqualityComparer`1 comparer)
+   at System.Collections.Generic.HashSet`1..ctor(IEnumerable`1 collection)
+   at DistributedServiceProvider.MessageConsumers.GetClosestNodes.GetClosestContacts(Identifier512 target, Func`2 terminate)
+   at peerTube.Multicast.BroadcastPeer.Connect(Int32 timeout)
+   at peerTube.Screens.BroadcastReceive.<Connect>b__0(Object a)

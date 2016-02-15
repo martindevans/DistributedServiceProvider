@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="DistributedServiceProvider">
+</Property><Property Name="Solution File" Value="C:\Users\Martin\Documents\Visual Studio 2010\Projects\DistributedServiceProvider\DistributedServiceProvider.sln">
+</Property><Property Name="Date" Value="02 October 2010">
+</Property><Property Name="Time" Value="02:53:02">
+</Property></Properties><Event ErrorLevel="3" Project="lua511" Source="..\LuaInterface\lua-5.1.2\lua511\lua511.vcproj" Description="No Conversion Required">
+</Event></UpgradeLog>

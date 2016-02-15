@@ -1,0 +1,796 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConcurrentPipes</name>
+    </assembly>
+    <members>
+        <member name="T:ConcurrentPipes.PipeListener`1">
+            <summary>
+            A class which receives messages from pipes. A single listener can be registered to an unlimited number of pipes
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:ConcurrentPipes.PipeListener`1.Guid">
+            <summary>
+            A GUID which uniquely identifies this listener
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.PipeListener`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConcurrentPipes.PipeListener`1"/> class.
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.PipeListener`1.AddMessage(`0)">
+            <summary>
+            Add a new message to this listener
+            </summary>
+            <param name="data">the message data</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeListener`1.Register(System.String)">
+            <summary>
+            Called every time this listener is registered on a pipe
+            </summary>
+            <param name="name">The name of the pipe</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeListener`1.Unregister(System.String)">
+            <summary>
+            Called every time this listener is unregistered from a pipe
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeListener`1.AcquireTalkbackSender(System.String)">
+            <summary>
+            Acquire a sender to talkback on this pipe
+            </summary>
+            <param name="name"></param>
+            <returns>a sender for the requested pipe, or null if this listener is not listening to such a pipe</returns>
+        </member>
+        <member name="T:ConcurrentPipes.Distributed.PipeEncoder`1">
+            <summary>
+            Converts bytes to data and data to bytes for transmission over a network
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.PipeEncoder`1.ToBytes(`0,System.ArraySegment{System.Byte},ConcurrentPipes.Distributed.Transmission@,System.Func{ConcurrentPipes.Distributed.DistributionConnection,ConcurrentPipes.Distributed.Transmission}@)">
+            <summary>
+            Converts the given data into bytes
+            </summary>
+            <param name="data">The data.</param>
+            <param name="bytes">The bytes.</param>
+            <param name="option">The option.</param>
+            <param name="transmissionFilter">A function which calculates a per connection transmission type. This may be null if this feature is not required.</param>
+            <returns>the length of the data to send, or -1 if the given byte array was too small</returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.PipeEncoder`1.FromBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Converts the given bytes into data
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.PipeEncoder`1.CalculateTransmission(ConcurrentPipes.Distributed.Transmission,ConcurrentPipes.Distributed.DistributionConnection)">
+            <summary>
+            Calculates the transmission option to use for this specific connection
+            </summary>
+            <param name="defaultOption">The default option.</param>
+            <param name="connection">The connection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.ByteEndpoint.ReadBytes(System.ArraySegment{System.Byte},ConcurrentPipes.Distributed.Transmission@,System.Func{ConcurrentPipes.Distributed.DistributionConnection,ConcurrentPipes.Distributed.Transmission}@)">
+            <summary>
+            Reads some bytes from this pipe, ready to be sent
+            </summary>
+            <param name="bytes">The bytes.</param>
+            <param name="option">the transmission guarantees to use when sending this message</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.ByteEndpoint.SendLocally(System.ArraySegment{System.Byte})">
+            <summary>
+            Sends the specified bytes onto this pipe, which will automatically be turned back into the correct object type
+            </summary>
+            <param name="bytes">The bytes.</param>
+        </member>
+        <member name="P:ConcurrentPipes.Distributed.ByteEndpoint.PipeName">
+            <summary>
+            Gets the name of the pipe.
+            </summary>
+            <value>The name of the pipe.</value>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributionAdapter`1.ConcurrentPipes#Distributed#ByteEndpoint#ReadBytes(System.ArraySegment{System.Byte},ConcurrentPipes.Distributed.Transmission@,System.Func{ConcurrentPipes.Distributed.DistributionConnection,ConcurrentPipes.Distributed.Transmission}@)">
+            <summary>
+            Reads some bytes from this pipe, ready to be sent
+            </summary>
+            <param name="bytes">The bytes.</param>
+            <param name="option">the transmission guarantees to use when sending this message</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributionAdapter`1.ConcurrentPipes#Distributed#ByteEndpoint#SendLocally(System.ArraySegment{System.Byte})">
+            <summary>
+            Sends the specified bytes.
+            </summary>
+            <param name="bytes">The bytes.</param>
+        </member>
+        <member name="T:ConcurrentPipes.Distributed.NetworkPacket">
+            <summary>
+            Build a packet ready for sending across a network
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.#ctor(System.ArraySegment{System.Byte})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConcurrentPipes.Distributed.NetworkPacket"/> struct.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="length">The length.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Write a byte array
+            </summary>
+            <param name="bytes"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Byte*,System.Int32)">
+            <summary>
+            Writes the specified bytes.
+            </summary>
+            <param name="bytes">The bytes.</param>
+            <param name="length">The length.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(ConcurrentPipes.Distributed.ByteArray)">
+            <summary>
+            Writes the specified bytes.
+            </summary>
+            <param name="bytes">The bytes.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Int16)">
+            <summary>
+            Converts the specified byte into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Int32)">
+            <summary>
+            Converts the specified byte into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Int64)">
+            <summary>
+            Converts the specified byte into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Single)">
+            <summary>
+            Converts the specified byte into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Double)">
+            <summary>
+            Converts the specified byte into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.UInt16)">
+            <summary>
+            Converts the specified value into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.UInt32)">
+            <summary>
+            Converts the specified value into network order and writes it into the packet writer
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.WriteVariable(System.UInt64)">
+            <summary>
+            Writes the specificed UInt64 with variable encoding, numbers closer to zero take less bytes to encode
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.WriteVariable(System.Int64)">
+            <summary>
+            Writes the specificed Int64 with variable encoding, numbers closer to zero take less bytes to encode
+            </summary>
+            <param name="i">The i.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.Byte)">
+            <summary>
+            Writes the specified byte
+            </summary>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.String,System.Int32,System.Int32)">
+            <summary>
+            Writes the specified string
+            </summary>
+            <param name="s">The string</param>
+            <param name="start">The index in the string to begin writing</param>
+            <param name="end">The index in the string to stop writing</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Write(System.String)">
+            <summary>
+            Writes the specified string
+            </summary>
+            <param name="s">The s.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadBytes(System.Int32)">
+            <summary>
+            Reads an array of bytes from the packet
+            </summary>
+            <param name="length">The length.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadBytes(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads an array of bytes from the packet into an array
+            </summary>
+            <param name="target">The array to write into</param>
+            <param name="offset">The offset to begin writing</param>
+            <param name="length">The length of bytes to read</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadUInt16">
+            <summary>
+            Reads an unsigned 16 bit integer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadInt16">
+            <summary>
+            Reads a signed 16 bit integer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadInt32">
+            <summary>
+            reads a signed 32 bit integer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadInt64">
+            <summary>
+            Reads a signed 64 bit integer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadVariableUInt64">
+            <summary>
+            Reads a variable length encoded unsigned 64 bit integer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadVariableInt64">
+            <summary>
+            Reads a variable length encoded signed integer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadByte">
+            <summary>
+            Reads a single byte
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ReadString">
+            <summary>
+            Reads a string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.ResetOffset">
+            <summary>
+            Resets the read/write offset. after calling this data in the buffer will be overwritten or will be read out again
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.NetworkPacket.Test">
+            <summary>
+            Tests this class.
+            </summary>
+        </member>
+        <member name="P:ConcurrentPipes.Distributed.NetworkPacket.Length">
+            <summary>
+            Gets the length of the underlying byte array
+            </summary>
+            <value>The length.</value>
+        </member>
+        <member name="P:ConcurrentPipes.Distributed.NetworkPacket.AvailableLength">
+            <summary>
+            Gets the number of bytes still available to write to
+            </summary>
+            <value>The length of available bytes</value>
+        </member>
+        <member name="P:ConcurrentPipes.Distributed.NetworkPacket.UnavailableLength">
+            <summary>
+            Gets the number of bytes which have been written to
+            </summary>
+            <value>The length of unavailable bytes</value>
+        </member>
+        <member name="T:ConcurrentPipes.PipeSender`1">
+            <summary>
+            An object which sends data down a specific named pipe
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConcurrentPipes.PipeSender`1.Send(`0)">
+            <summary>
+            Sends the specified data.
+            </summary>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeSender`1.AddMessage(`0)">
+            <summary>
+            Sends a message down this pipe
+            </summary>
+            <param name="data">the message data</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeSender`1.Register(System.String)">
+            <summary>
+            Called every time this listener is registered on a pipe
+            </summary>
+            <param name="name">The name of the pipe</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeSender`1.Unregister(System.String)">
+            <summary>
+            Called every time this listener is unregistered from a pipe
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:ConcurrentPipes.PipeSender`1.Name">
+            <summary>
+            Gets the name of the target pipe, returns "" if the sender is pointing at a non existant pipe
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="T:ConcurrentPipes.PipeLine`1">
+            <summary>
+            A pipeline of data which is sent, filtered, and received by multiple receivers
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:ConcurrentPipes.TypelessPipeline">
+            <summary>
+            A base class for pipelines which has no generic type. Allows a single collection to hold many of these
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.TypelessPipeline.Name">
+            <summary>
+            The Name of this pipe
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.TypelessPipeline.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConcurrentPipes.TypelessPipeline"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:ConcurrentPipes.TypelessPipeline.Trim">
+            <summary>
+            Trims this instance.
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.PipeLine`1.Sender">
+            <summary>
+            The sender object for this pipeline
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.Send(`0)">
+            <summary>
+            Sends the specified message down this pipe
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.SynchronousSend(`0,System.Boolean)">
+            <summary>
+            Sends the message in a synchronous fashion
+            </summary>
+            <param name="message">The message.</param>
+            <param name="distribute">Indicates if this message should be sent to the distribution adapter</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.FilterMessage(`0,`0@)">
+            <summary>
+            Filters the message.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="output">The output.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.RegisterFilter(ConcurrentPipes.PipeFilter{`0})">
+            <summary>
+            Registers the given filter.
+            </summary>
+            <param name="filter">The filter.</param>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.RemoveFilterByName(System.String)">
+            <summary>
+            Removes the filter with the given name
+            </summary>
+            <param name="name">The name.</param>
+            <returns>true, if a filter was removed, otherwise false</returns>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.RegisterListener(ConcurrentPipes.PipeListener{`0})">
+            <summary>
+            Registers a new listener on this pipe
+            </summary>
+            <param name="listener">The listener.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.RemoveListener(ConcurrentPipes.PipeListener{`0})">
+            <summary>
+            Unregisters a listener on this pipe
+            </summary>
+            <param name="listener">The listener.</param>
+            <returns>true, if a listener was unregistered, otherwise false</returns>
+        </member>
+        <member name="M:ConcurrentPipes.PipeLine`1.Trim">
+            <summary>
+            Trims this instance.
+            </summary>
+        </member>
+        <member name="P:ConcurrentPipes.PipeLine`1.Listeners">
+            <summary>
+            Gets the number of listeners.
+            </summary>
+            <value>The listeners.</value>
+        </member>
+        <member name="T:ConcurrentPipes.PipeReceiver`1">
+            <summary>
+            Receives messages from a named pipe
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConcurrentPipes.PipeReceiver`1.ReadMessage(`0@)">
+            <summary>
+            Reads the next message from this receiver1
+            </summary>
+            <param name="message">The message.</param>
+            <returns>true, if a message was read, otherwise false</returns>
+        </member>
+        <member name="T:ConcurrentPipes.PipeFilter`1">
+            <summary>
+            Provides filtering for data being sent down a pipe, can block data from being sent any further, or transform the data into some other data before sending it on
+            </summary>
+            <typeparam name="T">the type of data being sent</typeparam>
+        </member>
+        <member name="M:ConcurrentPipes.PipeFilter`1.Filter(`0,`0@)">
+            <summary>
+            Filters some data which is being sent to a local agent
+            </summary>
+            <param name="data">The data being sent</param>
+            <param name="result">the data to send on down this pipe</param>
+            <returns>true, if this data should be sent, otherwise false</returns>
+        </member>
+        <member name="P:ConcurrentPipes.PipeFilter`1.Name">
+            <summary>
+            Gets the a unique name for this filter
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="T:ConcurrentPipes.Receivers.ConcurrentQueue`1">
+            <summary>
+            A receiver which recieves messages in the order they arrive
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.ConcurrentQueue`1.ReadMessage(`0@)">
+            <summary>
+            Reads the next message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>true, if a message was available, otherwise false</returns>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.ConcurrentQueue`1.AddMessage(`0)">
+            <summary>
+            Adds the message.
+            </summary>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.ConcurrentQueue`1.Register(System.String)">
+            <summary>
+            Indicates that this receiver has been registered to the given named pipe
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.ConcurrentQueue`1.Unregister(System.String)">
+            <summary>
+            Indicates that this reciever has been unregistered from the given pipe
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="T:ConcurrentPipes.Receivers.BlockingQueue`1">
+            <summary>
+            A receiver which receives messages in the order they are received, blocks in ReadMessages until a message arrives.
+            Does not allow multiple readers
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.BlockingQueue`1.ReadMessage(`0@)">
+            <summary>
+            Blocks until the next message is available from this receiver
+            </summary>
+            <param name="message">The message.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.BlockingQueue`1.AddMessage(`0)">
+            <summary>
+            Adds the message.
+            </summary>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.BlockingQueue`1.Register(System.String)">
+            <summary>
+            Called when this receiver is registered to the given pipe
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.BlockingQueue`1.Unregister(System.String)">
+            <summary>
+            Called when this receiver is unregistered from a given pipe
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.BlockingQueue`1.GetEnumerator">
+            <summary>
+            Gets the enumerator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Receivers.BlockingQueue`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="T:ConcurrentPipes.Distributed.DistributedPipes">
+            <summary>
+            Performs various actions to do with distributing pipes across multiple processes
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.SetEncoder``1(System.String,ConcurrentPipes.Distributed.PipeEncoder{``0})">
+            <summary>
+            Sets the translator. Setting this to null prevents the pipe being distributed
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name of the pipe</param>
+            <param name="translator">The translator.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.RegisterConnection(ConcurrentPipes.Distributed.DistributionConnection)">
+            <summary>
+            Registers this connection between computers, all distribution enabled pipes will be synchronised between these processes
+            </summary>
+            <param name="connection">The connection.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.UnregisterConnection(ConcurrentPipes.Distributed.DistributionConnection)">
+            <summary>
+            Removes the connection. pipes will no longer be synchronised between these two processes
+            </summary>
+            <param name="connection">The connection.</param>
+            <returns>true, if the connection was remove, false if no such connection was found to remove</returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.WaitForReceiveMessages">
+            <summary>
+            Waits until the next time messages have been received from the network
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.WaitForSendMessages">
+            <summary>
+            Waits until the next time messages have been sent to the network
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.Heartbeat(System.TimeSpan)">
+            <summary>
+            Handles sending and receiving of network data for pipes. Should be called as often as possible. This is not reentrant, but is threadsafe
+            </summary>
+            <param name="timeout">The approximate upper bound on time</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributedPipes.Test">
+            <summary>
+            Tests this.
+            </summary>
+        </member>
+        <member name="T:ConcurrentPipes.Distributed.DistributionConnection">
+            <summary>
+            A two way connection between separate processes using pipes
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributionConnection.Send(System.ArraySegment{System.Byte},ConcurrentPipes.Distributed.Transmission)">
+            <summary>
+            Send this data to the other end
+            </summary>
+            <param name="data"></param>
+            <param name="option"></param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributionConnection.Receive(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Receive some byte data from the other end
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.DistributionConnection.Flush">
+            <summary>
+            Flush this connection by sending any buffered data
+            </summary>
+        </member>
+        <member name="T:ConcurrentPipes.Pipes">
+            <summary>
+            Performs various actions on named pipes
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.AcquireSender``1(System.String)">
+            <summary>
+            Acquires the sender for a given named pipe, creates the pipe if no such pipe exists
+            </summary>
+            <typeparam name="T">The type of the pipe</typeparam>
+            <param name="name">The name.</param>
+            <returns>a sender for this pipe</returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.AcquireSender``1(System.String,System.Boolean)">
+            <summary>
+            Acquires the sender, returns null if no such pipe exists and create is false
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="create">if set to <c>true</c> a new pipe will be created if no such pipe exists. In this case this method will never return null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.RegisterFilter``1(System.String,ConcurrentPipes.PipeFilter{``0})">
+            <summary>
+            Adds a filter to a pipe
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="filter">The filter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.RemoveFilter``1(System.String,ConcurrentPipes.PipeFilter{``0})">
+            <summary>
+            Removes the filter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="filter">The filter.</param>
+            <returns>true, if the filter was removed, false if the pipe does not exist or if the filter was not found to be removed</returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.RemoveNamedFilter``1(System.String,System.String)">
+            <summary>
+            Removes the named filter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pipeName">Name of the pipe.</param>
+            <param name="filterName">Name of the filter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.RegisterListener``1(System.String,ConcurrentPipes.PipeListener{``0})">
+            <summary>
+            Registers the listener. The listener will receive any messages sent on this pipe
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="listener">The listener.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.RemoveListener``1(System.String,ConcurrentPipes.PipeListener{``0})">
+            <summary>
+            Removes the listener. the listener will no longer receive messages sent on this pipe
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="listener">The listener.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.SendMessage``1(System.String,``0)">
+            <summary>
+            Sends the a message on a named pipe.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="message">The message.</param>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.GetPipe``1(System.String)">
+            <summary>
+            Gets the pipe with the given name
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.GetPipeTransaction``2(System.Int32,ConcurrentCollections.Sharded.ShardedDictionary{System.Int32,ConcurrentPipes.TypelessPipeline},``0[])">
+            <summary>
+            Gets a pipe of the given name in a transaction, returns null if no such pipe exists
+            </summary>
+            <typeparam name="I"></typeparam>
+            <typeparam name="O"></typeparam>
+            <param name="key">The key.</param>
+            <param name="collection">The collection.</param>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.Trim">
+            <summary>
+            Trims all pipes
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Pipes.Test">
+            <summary>
+            Tests this instance.
+            </summary>
+        </member>
+        <member name="P:ConcurrentPipes.Pipes.Count">
+            <summary>
+            Gets the count of pipes currently in the system
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="T:ConcurrentPipes.Distributed.Transmission">
+            <summary>
+            Defines the type of transmission reliability used for a messages
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.Transmission.None">
+            <summary>
+            No Transmission (do not send)
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.Transmission.UnreliableUnordered">
+            <summary>
+            Packets might not arrive, and will arrive in some arbitrary order
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.Transmission.UnreliableOrdered">
+            <summary>
+            Packets might not arrive, packets which arrive out of order will be droped
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.Transmission.ReliableUnordered">
+            <summary>
+            Packets will arrive, but will be in some arbitrary order
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.Transmission.ReliableOrdered">
+            <summary>
+            Packets will arrive, and will arrive in the same order they were sent
+            </summary>
+        </member>
+        <member name="T:ConcurrentPipes.Distributed.ByteArray">
+            <summary>
+            An array of bytes
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.ByteArray.Start">
+            <summary>
+            The start of the byte array
+            </summary>
+        </member>
+        <member name="F:ConcurrentPipes.Distributed.ByteArray.Length">
+            <summary>
+            The length of the array
+            </summary>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.ByteArray.#ctor(System.Byte*,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConcurrentPipes.Distributed.ByteArray"/> struct.
+            </summary>
+            <param name="start">The start.</param>
+            <param name="length">The length.</param>
+        </member>
+        <member name="M:ConcurrentPipes.Distributed.ByteArray.Copy(ConcurrentPipes.Distributed.ByteArray,ConcurrentPipes.Distributed.ByteArray,System.Int32)">
+            <summary>
+            Copies the specified count of bytes from source to destination
+            </summary>
+            <param name="source">The source.</param>
+            <param name="destination">The destination.</param>
+            <param name="count">The count to copy.</param>
+        </member>
+        <member name="P:ConcurrentPipes.Distributed.ByteArray.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:System.Byte"/> with the specified index.
+            </summary>
+            <value></value>
+        </member>
+    </members>
+</doc>

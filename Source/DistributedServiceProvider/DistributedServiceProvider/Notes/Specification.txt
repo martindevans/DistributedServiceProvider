@@ -1,0 +1,12 @@
+﻿To provide a distributed/decentralised way to provde services, supporting a scripting interface to provide a simple way to write new services.
+
+-> Distributed routing Table (A DHT with name resolution, but no data storage) is used for routing
+	-> Each DRT node has a unique 256 bit ID
+	-> Find the node on the network closest to the given key
+-> A single host should be able to support multiple DRTs
+-> Each service runs in a DRT which is unique to that service
+-> Two distinct DRTs should not merge
+-> The network must be tolerant of nodes disappearing with no warning
+-> Lookups should be fast
+-> Packet formats should be flexible and extensible (so that services can be upgraded without breaking the network)
+-> Packets should be small (so that the network is not overloaded with traffic)

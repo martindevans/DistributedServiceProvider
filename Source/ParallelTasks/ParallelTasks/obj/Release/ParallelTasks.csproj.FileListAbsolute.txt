@@ -1,0 +1,5 @@
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\bin\Release\ParallelTasks.dll
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\bin\Release\ParallelTasks.pdb
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\obj\Release\ParallelTasks.dll
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\obj\Release\ParallelTasks.pdb

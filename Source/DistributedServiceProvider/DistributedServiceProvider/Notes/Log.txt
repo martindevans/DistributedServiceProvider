@@ -1,0 +1,167 @@
+﻿23/07/2010
+-> Begun work on the new version of this project, old version was showing it's age and lack of proper design direction
+-> Created a NodeIdentifier structure with distance comparison and accompanying test
+
+24/07/2010
+-> Improved the ConcurrentPipes library
+-> Written a server which all clients connect to via ConcurrentPipes, this is not part of the actual system but is used for remote logging data from the network, and sending commands back to the network
+
+26/07/2010
+-> Added Callback consumer, which will allow waiting for replies to packets
+
+09/08/2010
+-> Using an array of buckets instead of a tree like kademlia,this is easier to implement, has better locking behaviour, and may well be faster
+-> Modified contact to accept a source for send and ping messages (they were always going to need this added in eventually)
+-> Modified logger to output JSON-like data for easier parsing later (everything is a dictionary of string->string)
+-> Modified test program to bootstrap the two test nodes together, currently throws a NotImplementedException on bucket refresh
+
+25/09/2010
+-> Modified IterativeLookupStep message to display the contents of the Heap and the contacted set
+
+26/09/2010
+-> Written the bootstrap operation, now the basic test program which bootstraps two nodes together works. This requires more testing
+-> Rearranged dependencies so that Contacts can be serialised properly
+-> Fixed serialisation of LocalContact so that it can be serialised without sending the entire DistributedRoutingTable (which would be pointless anyway)
+-> The distance metric I previously wrote is incorrect and needs a redesign and rewrite
+-> Written a new distance metric, it passes the tests
+
+27/09/2010
+-> Fixed an error with ordering of Identifiers which was causing a stackoverflow (infinite recursion in the minmaxheap due to an impossible ordering constraint)
+-> The test with three nodes bootstrapping together now works thanks to fixed ordering
+
+01/10/2010
+-> Discovered that a routing test (100 nodes, bootstrapped into a ring) fails occasionally. There is some non determinism in the system.
+-> Added a configuration parameter to force routing tables to not update buckets, which makes the system easier to analyse
+-> Added a configuration parameter to force routing tables to use non random refresh IDs, which makes the system deterministic
+-> Discovered that LuaInterface does not load properly on .net4, I need to investigate this
+
+02/10/2010
+-> Began work on a distributed KeyValuePair store in C# (leave the Lua issue for later)
+-> Basic KVP store works (no replication, it's unsuitable for a real production network)
+
+03/10/2010
+-> Investigating Erasure codes, specifically rateless ones
+	-> LT Codes http://www.inference.phy.cam.ac.uk/mackay/dfountain/LT.pdf
+	-> Raptor Codes http://www.inference.phy.cam.ac.uk/mackay/dfountain/RaptorPaper.pdf
+	-> Fountain Codes http://www.inference.phy.cam.ac.uk/mackay/fountain.pdf
+	-> Searching for minimum storage regenerating codes http://arxiv.org/PS_cache/arxiv/pdf/0910/0910.2245v1.pdf
+	-> Chapter of a textbook about fountain codes http://www.inference.phy.cam.ac.uk/mackay/itprnn/ps/588.596.pdf
+	-> Digital fountain approach to reliable distribution of bulk data http://http.icsi.berkeley.edu/ftp/global/pub/techreports/1998/tr-98-013.pdf
+	-> Beyond regenerating codes http://hal.archives-ouvertes.fr/docs/00/51/66/47/PDF/RR-7375.pdf
+	-> coding for Distributed storage wiki http://csi.usc.edu/~dimakis/StorageWiki/doku.php?id=start
+
+04/10/2010
+-> Cannot find any erasure code libraries for C#, I have begun building my own (LT Codes)
+-> Written a small set of tests for rateless erasure code
+
+05/10/2010
+-> Fountain+Bucket of rateless LT code system passes first test
+-> Begun refactoring messy development code into a neater form
+
+06/10/2010
+-> Refactored code now passes tests again and is much neater
+-> Still need to calculate the optimal packet degree
+-> Also still need to add in some packet verification to stop malicious nodes injecting fake data. Some kind of merkle hash tree
+
+12/10/2010
+-> Read up on the Robust soliton distribution http://www.inference.phy.cam.ac.uk/mackay/dfountain/LT.pdf, this should allow me to implement the fountain codes efficiently (they're correct, but inefficient at the moment)
+
+13/10/2010
+-> Implemented robust soliton distribution from Lubys paper http://www.inference.phy.cam.ac.uk/mackay/dfountain/LT.pdf, fountain is about 4 times more efficient in bandwidth and even more in speed.
+-> Fountain is ready to be integrated into file storage system on the DHT
+
+25/10/2010
+-> Missed a few days logging
+-> Implemented Erasure coding data storage
+-> Fixed some errors in KeyValuePairStore
+-> Written tests for ErasureStorage and KeyValuePairStore
+-> Fixed bug in Callback system
+-> Implemented some operators for Identifier512 (Identifier512 + int => Identifier512)
+-> Made Consumers threadsafe for use with Protobuf.net serializer (all consumers should call Serializer.PrepareSerializer before doing anything else)
+-> Fixed a major loading problem in erasure data store. Chunks are now distributed around the network according to the MD5 hash of their consecutive chunk keys
+
+26/10/2010
+-> Invetigated cryptographic signing of blocks for erasure code store
+-> Individual blocks could be signed, but then the regeneration of blocks by all peers would be impossible
+-> The entire file can be signed, but that will lead to a lot of wastage in the event of a single fake packet
+-> a Merkle Hash Tree (http://web.archive.org/web/20080316033726/http://www.open-content.net/specs/draft-jchapweske-thex-02.html) could be used to verify final output blocks as they are generated, but this could lead to some pollution in the block cache which will generate more bad blocks later. This is a workable solution
+-> Homomorphic encryption can be used to verify the combined blocks as they arrive, since a homomorphic hash can hold the property Hash(A ^ B) == Hash(A) ^ Hash(B)
+	-> http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4509794
+	-> http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.87.3400&rep=rep1&type=pdf
+	-> However, homomorphic encryption is very complex, and is beyond the scope of my project
+-> I have removed the block verification from my immediate goals. This means file storage is no longer going to be secure against malicious nodes, but I don't have time to implement a decent security scheme
+-> I shall implement merkle hash trees if I get spare time later
+
+27/10/2010
+-> Started writing a MapReduce implementation
+-> This implementation assumes nodes never go down unexpectedly, and no nodes are malicious (it's mostly here as a test for me to get to grips with MapReduce)
+-> Implemented a wordcounter using the empty MapReduce skeleton classes
+-> Implemented a test for the WordCount which obviously fails the second it tries to call an unimplemented base class method
+-> Implemented the core Map issue part of the algorithm
+-> Refactored some of the MapReduce methods to be better named
+
+28/10/2010
+-> implemented issuing maps orders to remote peers
+-> implemented running a map job on the local peer when ordered
+-> implemented emitting intermediate values from map
+
+29/10/2010
+-> Worked on making reducers wait until all mappers have finished before running. Cannot send a message from root peer to all reducers (since there may be many reducers). Instead root sends to all mappers informing them all that all map stages have finished, then the mappers tell the reducers they used. To form a tree structure
+-> Implemented the peer->map stage of map completion
+-> Implemented the map->Reducers stage of map completion
+-> Implemented reducers sending results back to the root peer
+-> MapReduce finished, WordCount passes test. However there is a "memory leak" in the way it handles remote callbacks
+-> Leak fixed, but it exposed the same kind of leak in a load of other places. Modifying tests to expose this
+-> Updated tests, suspicions confirmed, all the routing tests now fail thanks to this leak
+-> Fixed the leak, it was in the lookup process, it allocated but never freed a callback token
+-> Modified the callback system to minimise occurences of this leak in the future (it's now only possible when a message is sent, but a response never comes back)
+
+31/10/2010
+-> Worked on the eve market analyser demo yesterday and today
+-> Downloaded the eve static data dump to get some map data which is needed for part of the analysis
+-> Set up downloading eve market data from eve central. Last 30 days data is about 100Mb of market data to analyse
+-> Set up a Map/Reduce stage which aggregates all market data to do with the same type of item
+-> Fixed some concurrency bugs in the base Map/Reduce implementation
+
+01/11/2010
+-> Added a GradientSearch class to the eve market analyser
+-> Added a market visualiser, which will display the progress of the eve market search graphically
+-> Added quickgraph to the eve market analyser, to do pathfinding queries
+-> Imported Eve data dump into quickgraph, written data wrapper classes
+
+16/11/2010
+-> Dropped eve market analyser,it's way too complex as a simple demo of distributed processing
+-> Written the classical implementation of sorting for Map/Reduce
+-> Yahoo sorting paper: http://www.hpl.hp.com/hosted/sortbenchmark/YahooHadoop.pdf
+-> Google map/reduce paper: http://static.googleusercontent.com/external_content/untrusted_dlcp/labs.google.com/en//papers/mapreduce-osdi04.pdf
+-> Implemented automatic linking of consumers using attributes, which makes developing a little easier (since prerequisites are automatically found for you)
+-> If autolinking cannot find a suitable thing to link, it will attempt to construct one for you, if it can find a suitable constructor, if not it throws an exception
+
+19/11/2010
+-> Created IndexPeer, this acts as an index of all the video multicasts currently going on
+-> Created BroadcastPeer, this is the peer which takes part in the actual multicast transmission
+-> Broadcasting and indexing take part on different networks. All peers join the index network, locate the video they want, and then join the broadcast network for that video. This is because things are a lot easier to program if every node in the network is consuming the same video
+-> Created BroadcastStream, which is safe to read/write from different threads (only 1 reader and 1 writer are permitted)
+
+25/11/2010
+-> Create UdpContact based on the lidgren networking library, it can leak memory and needs a lot of tidying up but it should do for demo purposes
+-> Added an early termination option to lookup operations, which can make a lookup terminate once a contact meets some requirement
+-> Taken some readings of network lookup steps. Which indicate a logarithmic curve (as expected)
+
+29/11/2010
+-> Refactored the GetClosestNodes operation to be in a separate consumer object instead of a member method of the routing table
+-> Set up requests for parents nodes in the multicast tree
+-> Parents respond to clients with a reject/accept message, depending upon if the client is already parent of the parent tree
+
+06/12/2010
+-> This project has been picked up by an open source prototype for p2p DNS http://code.google.com/p/trust4/
+	-> This has picked out some bugs in the code and strengthened the project. It also demonstrates the project is genuinely useful for p2p development
+	-> The need for validation of contacts has been highlighted. This can be implemented within contact subclasses so long as the system provides a way to remove contacts
+-> Ping method can accept null contacts (this seems to happen a lot when developers make mistakes developing of plugins, so I fixed it to make development easier)
+-> Fixed a bug with finding nodes, which was caused by timeouts in lookups (previously undiscovered by unit tests)
+-> Added a "Trusted" property to nodes, if unset this will cause the node to be removed from contact buckets (until it is set again)
+
+08/12/2010
+-> Fixed Distributed Service Provider to use length prefixes on protocol buffer messages (the recommended behaviour for network streams)
+-> Updated Consumers to use length prefixing
+-> Added a source field to callbacks

@@ -1,0 +1,9 @@
+A DHT-based P2P system
+
+In modern times, networked applications are becoming increasingly important to many aspects of life. Traditionally these kinds of networked applications have used a client/server architecture, a single canonical server controlling millions of clients. However, this kind of approach is not scalable, DDoS (Distributed Denial of Service) attacks demonstrate the risks of too many clients - content becomes harder to access the more popular it becomes. Furthermore, a single server is not suitable for reliable hosting of content, the weak point of a distribution network with a single server is, naturally, the server.
+
+Recently peer-to-peer (p2p) networks, such as BitTorrent, have come forth as a possible solution to both these problems. In these networks the more popular that content becomes the easier it is to access, because more clients will strengthen the p2p network. There are no weak points in a properly structured p2p network. Taking down a single peer has no effect, and taking down all of the peers is almost impossible; this makes the network very tolerant to attack by any method.
+
+However, the downside of building a peer to peer application is that it is significantly more complex than building a client/server system. Peers can be unreliable, they may drop out of the network with no warning and some may even be malicious nodes that deliberately distribute false data. Building a system which can tolerate all of these faults is extremely difficult; certainly it is beyond the scope of most application development project timetables and budgets.
+
+My project aims to lower the barrier to entry for application developers to build p2p networks by building a flexible p2p routing system which can be extended by individual application developers.

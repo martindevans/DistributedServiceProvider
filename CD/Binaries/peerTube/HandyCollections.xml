@@ -1,0 +1,896 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HandyCollections</name>
+    </assembly>
+    <members>
+        <member name="T:HandyCollections.BloomFilter`1">
+            <summary>
+            A Bloom filter, supports adding but not removing, and never returns false negatives on containment queries
+            http://en.wikipedia.org/wiki/Bloom_filter
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HandyCollections.BloomFilter`1.KeyCount">
+            <summary>
+            The number of keys generated for a given item
+            </summary>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.BloomFilter`1"/> class.
+            </summary>
+            <param name="size">The size in bits</param>
+            <param name="keys">The key count</param>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.#ctor(System.Int32,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.BloomFilter`1"/> class.
+            </summary>
+            <param name="estimatedsize">The estimated number of items to add to the filter</param>
+            <param name="targetFalsePositiveRate">The target positive rate.</param>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.#ctor(System.Int32,System.Int32,HandyCollections.CountingBloomFilter{`0}.GenerateHash)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.BloomFilter`1"/> class.
+            </summary>
+            <param name="size">The size in bits</param>
+            <param name="keys">The key count</param>
+            <param name="hashgen">The hash generation function</param>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.#ctor(System.Int32,System.Single,HandyCollections.CountingBloomFilter{`0}.GenerateHash)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.BloomFilter`1"/> class.
+            </summary>
+            <param name="estimatedsize">The estimated number of items in the filter</param>
+            <param name="targetFalsePositiveRate">The target positive rate when the estimated size is attained</param>
+            <param name="hashgen">The hash generation function</param>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.Add(`0)">
+            <summary>
+            Adds the specified item to the filter
+            </summary>
+            <param name="item">The item.</param>
+            <returns>Returns true if this item was already in the set</returns>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.Contains(`0)">
+            <summary>
+            Determines whether this filter contains the specificed object, this will sometimes return false positives but never false negatives
+            </summary>
+            <param name="item">The item.</param>
+            <returns>
+            	<c>true</c> if the filter might contain the item; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.Union(HandyCollections.BloomFilter{`0})">
+            <summary>
+            Unions the specified filters
+            </summary>
+            <param name="s">The s.</param>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.Intersection(HandyCollections.BloomFilter{`0})">
+            <summary>
+            Intersections the specified filters
+            </summary>
+            <param name="s">The s.</param>
+        </member>
+        <member name="M:HandyCollections.BloomFilter`1.SystemHash(`0)">
+            <summary>
+            Uses the system "GetHashFunction" method to hash an object
+            </summary>
+            <param name="a">A.</param>
+            <returns></returns>
+        </member>
+        <member name="P:HandyCollections.BloomFilter`1.Count">
+            <summary>
+            Gets the number of items which have been added to this filter
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:HandyCollections.BloomFilter`1.FalsePositiveRate">
+            <summary>
+            Gets the current false positive rate.
+            </summary>
+            <value>The false positive rate.</value>
+        </member>
+        <member name="T:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16">
+            <summary>
+            Creates a set of 16 bit numbers which repeats after 2^16 numbers (ie. longest possible period of non repeating numbers)
+            </summary>
+        </member>
+        <member name="F:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.PERIOD">
+            <summary>
+            The number of numbers this sequence will go through before repeating
+            </summary>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.#ctor(System.UInt16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16"/> class.
+            </summary>
+            <param name="seed">The seed to initialise the sequence with</param>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16"/> class.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.NextRandom">
+            <summary>
+            Gets the next random number in the sequence
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.CorrectnessTest">
+            <summary>
+            Checks if this is implemented correctly
+            </summary>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.GetEnumerator">
+            <summary>
+            Gets the enumerator which will iterate through all the values of this instance without repeating
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister16.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="T:HandyCollections.Extensions.IEnumerableExtension">
+            <summary>
+            Extensions to the IEnumerable interface
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Extensions.IEnumerableExtension.Append``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            enumerates the start and then the end
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="start">The start.</param>
+            <param name="end">The end.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Extensions.IEnumerableExtension.Append``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            Appends the given items onto this enumeration
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="start">The start.</param>
+            <param name="end">The end.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Extensions.IEnumerableExtension.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Determines whether the specified enumerable is empty.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable">The enumerable.</param>
+            <returns>
+            	<c>true</c> if the specified enumerable is empty; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:HandyCollections.StaticRandomNumber">
+            <summary>
+            A threadsafe static random number generator
+            </summary>
+        </member>
+        <member name="M:HandyCollections.StaticRandomNumber.Random(System.UInt32,System.UInt32)">
+            <summary>
+            Creates a random number from the specified seed
+            </summary>
+            <param name="seed">The seed value</param>
+            <param name="upperBound">The maximum value (exclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.StaticRandomNumber.Random(System.UInt32)">
+            <summary>
+            Creates a random number, using the time as a seed
+            </summary>
+            <param name="upperBound">The maximum value (exclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.StaticRandomNumber.Random">
+            <summary>
+            Creates a random number, using the time as the seed
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HandyCollections.RecentlyUsedQueue`1">
+            <summary>
+            A double ended queue providing Most recently used and least recently used data
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.RecentlyUsedQueue`1"/> class.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.Use(`0)">
+            <summary>
+            'Uses' the specified item, ie. moves/adds it to the Most recently used position
+            </summary>
+            <param name="item">The item.</param>
+            <returns>True, if the item was newly added, otherwise false</returns>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.RemoveLeastRecentlyUsed">
+            <summary>
+            Removes the least recently used.
+            </summary>
+            <returns>the item which was removed</returns>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.RemoveMostRecentlyUsed">
+            <summary>
+            Removes the most recently used.
+            </summary>
+            <returns>the item which was removed</returns>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.Remove(`0)">
+            <summary>
+            Removes the specified item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>True; if anything was removed, otherwise false</returns>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.GetEnumerator">
+            <summary>
+            Returns an enumerator which goes from least to most recently used
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.RecentlyUsedQueue`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator which goes from least to most recently used
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:HandyCollections.RecentlyUsedQueue`1.Count">
+            <summary>
+            Gets the count.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:HandyCollections.RecentlyUsedQueue`1.LeastRecentlyUsed">
+            <summary>
+            Gets the least recently used.
+            </summary>
+            <value>The least recently used.</value>
+        </member>
+        <member name="P:HandyCollections.RecentlyUsedQueue`1.MostRecentlyUsed">
+            <summary>
+            Gets the most recently used.
+            </summary>
+            <value>The most recently used.</value>
+        </member>
+        <member name="T:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32">
+            <summary>
+            Creates a set of 32 bit numbers which repeats after 2^32 numbers (ie. longest possible period of non repeating numbers)
+            </summary>
+        </member>
+        <member name="F:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32.PERIOD">
+            <summary>
+            The number of numbers this sequence will go through before repeating
+            </summary>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32.#ctor(System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32"/> class.
+            </summary>
+            <param name="seed">The seed to initialise the sequence with</param>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32.NextRandom">
+            <summary>
+            Gets the next random number in the sequence
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32.GetEnumerator">
+            <summary>
+            Gets the enumerator which will iterate through all the values of this instance without repeating
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.RandomNumber.LinearFeedbackShiftRegister32.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="T:HandyCollections.Heap.MinMaxMedianHeap`1">
+            <summary>
+            a heap which allows O(1) extraction of minimum, maximum and median items. With insertion/deletion in O(logn) time
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxMedianHeap`1"/> class.
+            </summary>
+            <param name="capacity">The initial capacity.</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.#ctor(`0[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxMedianHeap`1"/> class.
+            </summary>
+            <param name="initialItems">The initial items.</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxMedianHeap`1"/> class.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.#ctor(System.Collections.Generic.Comparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxMedianHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer to use</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.#ctor(System.Collections.Generic.Comparer{`0},System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxMedianHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer to use</param>
+            <param name="capacity">The initial capacity of the heap</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.#ctor(System.Collections.Generic.Comparer{`0},`0[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxMedianHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer to use</param>
+            <param name="initialItems">The initial items to put into the heap</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.Add(`0)">
+            <summary>
+            Adds the specified item to the heap
+            </summary>
+            <param name="item">item to add to the heap</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.AddMany(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add many items to the heap
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.RemoveMax">
+            <summary>
+            Removes the maximum item from the heap
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.RemoveMin">
+            <summary>
+            Removes the minimum item from the heap
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.RemoveMedian">
+            <summary>
+            Removes the median item from the heap
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.Clear">
+            <summary>
+            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only. </exception>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.Rebalance">
+            <summary>
+            Rebalances the two trees, so (lesser.count == greater.count) | (lesser.count == greater.count + 1)
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.SelectSmallerHeap(HandyCollections.Heap.MinMaxHeap{`0})">
+            <summary>
+            Selects the smaller heap.
+            </summary>
+            <param name="whenEqual">The heap to return when equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <returns>
+            true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.System#Collections#Generic#ICollection{T}#CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="array"/> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="arrayIndex"/> is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type T cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxMedianHeap`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.Comparer">
+            <summary>
+            The comparer to use for items in this collection. Changing this comparer will trigger a heapify operation
+            </summary>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <value></value>
+            <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.Maximum">
+            <summary>
+            Gets the maximum item in the heap
+            </summary>
+            <value>The max.</value>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.Minimum">
+            <summary>
+            Gets the minimum item in the heap
+            </summary>
+            <value>The min.</value>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.Median">
+            <summary>
+            Gets the median item in the heap. If there are a even number of items, the smaller of the two is selected
+            </summary>
+            <value>The median.</value>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.LowMedian">
+            <summary>
+            Gets the median, when there are an even number of items this selects the smaller of the two medians
+            </summary>
+            <value>The low median.</value>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.HighMedian">
+            <summary>
+            Gets the median, when there are an even number of items this selects the larger of the two medians
+            </summary>
+            <value>The high median.</value>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxMedianHeap`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <value></value>
+            <returns>always returns false</returns>
+        </member>
+        <member name="T:HandyCollections.TypedWeakReference`1">
+            <summary>
+            A weak reference to a an object of a specific type. The item may still be garbage collected even while a weak reference is held.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HandyCollections.TypedWeakReference`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.TypedWeakReference`1"/> class.
+            </summary>
+            <param name="target">The target.</param>
+        </member>
+        <member name="M:HandyCollections.TypedWeakReference`1.#ctor(`0,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.TypedWeakReference`1"/> class.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="trackResurrection">if set to <c>true</c> the object referenced by this weak reference is tracked after finalisation.</param>
+        </member>
+        <member name="P:HandyCollections.TypedWeakReference`1.IsAlive">
+            <summary>
+            Gets a value indicating whether this instance is alive.
+            </summary>
+            <value><c>true</c> if this instance is alive; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:HandyCollections.TypedWeakReference`1.Target">
+            <summary>
+            Gets or sets the target.
+            </summary>
+            <value>The target.</value>
+        </member>
+        <member name="P:HandyCollections.TypedWeakReference`1.TrackResurrection">
+            <summary>
+            Gets a value indicating whether the object referenced by this weak reference is tracked after finalisation.
+            </summary>
+            <value><c>true</c> if the object referenced by this weak reference is tracked after finalisation; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:HandyCollections.Heap.MinMaxHeap`1">
+            <summary>
+            A heap which allows O(1) extraction of both minimum and maximum items, and O(logn) insertion/deletion
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxHeap`1"/> class.
+            </summary>
+            <param name="capacity">The initial capacity.</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxHeap`1"/> class.
+            </summary>
+            <param name="initialItems">The initial items.</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxHeap`1"/> class.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.#ctor(System.Collections.Generic.Comparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer to use</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.#ctor(System.Collections.Generic.Comparer{`0},System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer to use</param>
+            <param name="capacity">The initial capacity of the heap</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.#ctor(System.Collections.Generic.Comparer{`0},System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.Heap.MinMaxHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer to use</param>
+            <param name="initialItems">The initial items to put into the heap</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.Add(`0)">
+            <summary>
+            Adds the specified item to the heap
+            </summary>
+            <param name="a">item to add to the heap</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.AddMany(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            adds all these Items to the heap and heapifies the heap (more efficient than adding each of the Items individually)
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.AddMany(System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32)">
+            <summary>
+            Adds the items to the heap and heapifies
+            </summary>
+            <param name="a">A.</param>
+            <param name="start">The start index to take items from</param>
+            <param name="length">The number of items to take</param>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.Clear">
+            <summary>
+            Clears this heap.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.RemoveMax">
+            <summary>
+            Deletes the item with the largest key in the heap
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the heap is empty</exception>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.RemoveMin">
+            <summary>
+            Deletes the item with the smallest key in the heap
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the heap is empty</exception>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.RemoveMax(System.Int32)">
+            <summary>
+            Removes several nodes from the maximum end of the heap
+            </summary>
+            <param name="count">The count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.RemoveMin(System.Int32)">
+            <summary>
+            Removes several nodes from the minimum end of the heap
+            </summary>
+            <param name="count">The count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.MaxIndex">
+            <summary>
+            Finds the index of the max element
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.Contains(`0)">
+            <summary>
+            Determines whether the heap contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the heap.</param>
+            <returns>
+            true if <paramref name="item"/> is found in the heap; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.Heapify">
+            <summary>
+            Reorder the heap
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.BubbleUp(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <returns>the final resting index of the item</returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.IndexOf(`0)">
+            <summary>
+            Finds the index of the given item in the hash tree
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.System#Collections#Generic#ICollection{T}#CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="array"/> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="arrayIndex"/> is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type T cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.Heap.MinMaxHeap`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxHeap`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <value></value>
+            <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxHeap`1.Comparer">
+            <summary>
+            The comparer to use for items in this collection. Changing this comparer will trigger a heapify operation
+            </summary>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxHeap`1.Maximum">
+            <summary>
+            finds the largest item in the heap
+            </summary>
+            <returns>value with maximal key</returns>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxHeap`1.Minimum">
+            <summary>
+            finds the smallest item in the heap
+            </summary>
+            <returns>value with minimal key</returns>
+        </member>
+        <member name="P:HandyCollections.Heap.MinMaxHeap`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            always false
+            </summary>
+            <value></value>
+            <returns>false.</returns>
+        </member>
+        <member name="T:HandyCollections.Extensions.IListExtensions">
+            <summary>
+            A set of extensions to the IList interface
+            </summary>
+        </member>
+        <member name="M:HandyCollections.Extensions.IListExtensions.OrderSelect``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Selects the index of the item from the list which would be in the given position if the list were sorted, using the default comparer.
+            This will leave the list in an undefined order afterwards
+            </summary>
+            <param name="list">The list to select values from</param>
+            <param name="position">Position to select</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Extensions.IListExtensions.OrderSelect``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0},System.Int32)">
+            <summary>
+            Selects the index of the item from the list which would be in the given position if the list were sorted.
+            This will leave the list in an undefined order afterwards
+            </summary>
+            <param name="list">The list to select values from</param>
+            <param name="position">Position to select</param>
+            <param name="comparer">The comparer to use</param>
+            <returns></returns>
+        </member>
+        <member name="M:HandyCollections.Extensions.IListExtensions.Partition``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Partitions the list around a given pivot index using the default comparer
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">The list.</param>
+            <param name="left">The leftmost index of the sublist</param>
+            <param name="right">The rightmost index of the sublist</param>
+            <param name="pivotIndex">Index of the pivot.</param>
+            <returns>the new index of the pivot element</returns>
+        </member>
+        <member name="M:HandyCollections.Extensions.IListExtensions.Partition``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Partition an IList around a given pivot index
+            </summary>
+            <typeparam name="T">type</typeparam>
+            <param name="list">list to reorder</param>
+            <param name="comparer">comparer to use</param>
+            <param name="left">left index of the sublist to order</param>
+            <param name="right">right index of the sublist to order</param>
+            <param name="pivotIndex">the index of the pivot</param>
+            <returns>the new index of the pivot</returns>
+        </member>
+        <member name="M:HandyCollections.Extensions.IListExtensions.Swap``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
+            <summary>
+            Swap the items in the two given positions
+            </summary>
+            <typeparam name="T">Type of the list</typeparam>
+            <param name="list">a list to swap the items inside</param>
+            <param name="a">index of the first item</param>
+            <param name="b">index of the second item</param>
+        </member>
+        <member name="T:HandyCollections.CountingBloomFilter`1">
+            <summary>
+            A bloom filter. False positives are possible, false negatives are not. Removing items is possible
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HandyCollections.CountingBloomFilter`1.KeyCount">
+            <summary>
+            The number of keys to use for this filter
+            </summary>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.BloomFilter`1"/> class.
+            </summary>
+            <param name="size">The size in bits</param>
+            <param name="keys">The key count</param>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.#ctor(System.Int32,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.BloomFilter`1"/> class.
+            </summary>
+            <param name="estimatedsize">The estimated number of items to add to the filter</param>
+            <param name="targetFalsePositiveRate">The target positive rate.</param>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.#ctor(System.Int32,System.Int32,HandyCollections.CountingBloomFilter{`0}.GenerateHash)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.CountingBloomFilter`1"/> class.
+            </summary>
+            <param name="size">The size of the filter in bytes</param>
+            <param name="keys">The number of keys to use</param>
+            <param name="hashgen">The hash generation function</param>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.#ctor(System.Int32,System.Single,HandyCollections.CountingBloomFilter{`0}.GenerateHash)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HandyCollections.CountingBloomFilter`1"/> class.
+            </summary>
+            <param name="estimatedsize">The estimated number of members of the set</param>
+            <param name="targetFalsePositiveRate">The target false positive rate when the estimated size is attained</param>
+            <param name="hashgen">The hash generation function</param>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.Add(`0)">
+            <summary>
+            Adds the specified item to the filter
+            </summary>
+            <param name="item">The item.</param>
+            <returns>Returns true if this item was already in the set</returns>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.Remove(`0)">
+            <summary>
+            Adds the specified item to the filter
+            </summary>
+            <param name="item">The item.</param>
+            <returns>Returns true if this item was already in the set</returns>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.Contains(`0)">
+            <summary>
+            Determines whether this filter contains the specificed object, this will sometimes return false positives but never false negatives
+            </summary>
+            <param name="item">The item.</param>
+            <returns>
+            	<c>true</c> if the filter might contain the item; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:HandyCollections.CountingBloomFilter`1.Union(HandyCollections.CountingBloomFilter{`0})">
+            <summary>
+            Unions the specified filters
+            </summary>
+            <param name="s">The s.</param>
+        </member>
+        <member name="P:HandyCollections.CountingBloomFilter`1.Count">
+            <summary>
+            Gets the number of items which have been added to this filter
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:HandyCollections.CountingBloomFilter`1.FalsePositiveRate">
+            <summary>
+            Gets the current false positive rate.
+            </summary>
+            <value>The false positive rate.</value>
+        </member>
+        <member name="T:HandyCollections.CountingBloomFilter`1.GenerateHash">
+            <summary>
+            A hash generation function
+            </summary>
+        </member>
+    </members>
+</doc>

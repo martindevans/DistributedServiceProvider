@@ -1,0 +1,9 @@
+\\jaffle.cs.bham.ac.uk\ug\mxe869\fyp\Source\ParallelTasks\ParallelTasks\bin\Debug\ParallelTasks.dll
+\\jaffle.cs.bham.ac.uk\ug\mxe869\fyp\Source\ParallelTasks\ParallelTasks\bin\Debug\ParallelTasks.pdb
+\\jaffle.cs.bham.ac.uk\ug\mxe869\fyp\Source\ParallelTasks\ParallelTasks\obj\Debug\ResolveAssemblyReference.cache
+\\jaffle.cs.bham.ac.uk\ug\mxe869\fyp\Source\ParallelTasks\ParallelTasks\obj\Debug\ParallelTasks.dll
+\\jaffle.cs.bham.ac.uk\ug\mxe869\fyp\Source\ParallelTasks\ParallelTasks\obj\Debug\ParallelTasks.pdb
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\bin\Debug\ParallelTasks.dll
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\bin\Debug\ParallelTasks.pdb
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\obj\Debug\ParallelTasks.dll
+C:\Users\Martin\Documents\university work\Year 3\project\Source\ParallelTasks\ParallelTasks\obj\Debug\ParallelTasks.pdb

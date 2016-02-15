@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="DistributedServiceProvider">
+</Property><Property Name="Solution File" Value="C:\Users\Martin\Documents\university work\Year 3\project\Source\DistributedServiceProvider\DistributedServiceProvider.sln">
+</Property><Property Name="Date" Value="07 December 2010">
+</Property><Property Name="Time" Value="03:45">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="DistributedServiceProvider" Source="DistributedServiceProvider\DistributedServiceProvider.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="DistributedServiceProvider" Source="DistributedServiceProvider\DistributedServiceProvider.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="TestProject" Source="TestProject\TestProject.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="TestProject" Source="TestProject\TestProject.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="DistributedServiceProvider_RemoteLogger" Source="..\DistributedServiceProvider_RemoteLogger\DistributedServiceProvider_RemoteLogger\DistributedServiceProvider_RemoteLogger.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="DistributedServiceProvider_RemoteLogger" Source="..\DistributedServiceProvider_RemoteLogger\DistributedServiceProvider_RemoteLogger\DistributedServiceProvider_RemoteLogger.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="DistributedServiceProvider.Base" Source="DistributedServiceProviderModels\DistributedServiceProvider.Base.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="DistributedServiceProvider.Base" Source="DistributedServiceProviderModels\DistributedServiceProvider.Base.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="ConsoleClient" Source="ConsoleClient\ConsoleClient.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="ConsoleClient" Source="ConsoleClient\ConsoleClient.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="LoggerMessages" Source="LoggerMessages\LoggerMessages.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="LoggerMessages" Source="LoggerMessages\LoggerMessages.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="Consumers" Source="Consumers\Consumers.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="Consumers" Source="Consumers\Consumers.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="ConcurrentPipes" Source="..\..\..\..\..\Visual Studio 2010\Projects\ConcurrentPipes\ConcurrentPipes\ConcurrentPipes.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="ConcurrentPipes" Source="..\..\..\..\..\Visual Studio 2010\Projects\ConcurrentPipes\ConcurrentPipes\ConcurrentPipes.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="1" Project="protobuf-net" Source="..\..\..\..\..\Visual Studio 2010\Projects\protobuf.net\protobuf-net\protobuf-net.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="protobuf-net" Source="..\..\..\..\..\Visual Studio 2010\Projects\protobuf.net\protobuf-net\protobuf-net.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="protobuf-net" Source="..\..\..\..\..\Visual Studio 2010\Projects\protobuf.net\protobuf-net\protobuf-net.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HandyCollections" Source="..\..\..\..\..\Visual Studio 2010\Projects\HandyCollections\HandyCollections\HandyCollections.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="HandyCollections" Source="..\..\..\..\..\Visual Studio 2010\Projects\HandyCollections\HandyCollections\HandyCollections.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="ConcurrentCollections" Source="..\..\..\..\..\Visual Studio 2010\Projects\ConcurrentCollections\ConcurrentCollections.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="ConcurrentCollections" Source="..\..\..\..\..\Visual Studio 2010\Projects\ConcurrentCollections\ConcurrentCollections.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="DigitalFountain" Source="..\DigitalFountain\DigitalFountain\DigitalFountain.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="DigitalFountain" Source="..\DigitalFountain\DigitalFountain\DigitalFountain.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="ParallelTasks" Source="..\..\..\..\..\Visual Studio 2010\Projects\ParallelTasks\ParallelTasks\ParallelTasks.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="ParallelTasks" Source="..\..\..\..\..\Visual Studio 2010\Projects\ParallelTasks\ParallelTasks\ParallelTasks.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="QuickGraph" Source="..\QuickGraph\QuickGraph\QuickGraph.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="QuickGraph" Source="..\QuickGraph\QuickGraph\QuickGraph.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="Lidgren.Network" Source="..\..\..\..\..\Visual Studio 2010\Projects\Lidgren.Network\Lidgren.Network\Lidgren.Network.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="Lidgren.Network" Source="..\..\..\..\..\Visual Studio 2010\Projects\Lidgren.Network\Lidgren.Network\Lidgren.Network.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="DistributedServiceProvider.sln" Description="The solution file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="" Source="DistributedServiceProvider.sln" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="protobuf-net" Source="..\..\..\..\..\Visual Studio 2010\Projects\protobuf.net\protobuf-net\protobuf-net.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,11 @@
+Distributed hash table
+
+Research
+-Chord
+This is the original DHT implementation. Nodes are arranged into a 160 bit keyspace which is visualised to be circular, data is stored in the "nearest" nodes to the key, as established by an angle distance metric.
+
+-Kademlia
+A more modern DHT design which attempts to learn from some of the mistakes of Chord. Nodes are once again arranged into a keyspace, but this time the distance between this is not an angle based metric, but instead the exclusive-or of the two keys put together, this is somewhat simpler to program. The system also self maintains with just simple pings messages, contact data in the finger table is updated when messages arrive. Finally, the Kademlia finger table is ordered in such a way that a new node will never evict and old node which is still active, this prevents some basic denial of service attacks on the system, and reduces the chances of the network fragmenting under high churn.
+
+Design
+During my research I have seen that all current DHT designs perform two separate functions, they all perform both the network maintanence and key lookup which are closely related, mapping the key onto the correct node. Secondly, they all contain some logic for storing and retrieving data. This is bad software design, it leads to more complex and less flexible DHT systems. For my system I will implement the Kademlia routing protocol (mapping a key onto a node), and this is all the basic DHT will do, once the DHT has found the contact data for the node you should communicate with, it is a different system which establishes communication with the remote peer. This leads to a more flexible DHT system, where subclasses of the basic Kademlia Node can perform different functionility even within the same network.

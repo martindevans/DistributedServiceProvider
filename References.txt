@@ -1,0 +1,20 @@
+Original paper
+http://pdos.csail.mit.edu/~petar/papers/maymounkov-kademlia-lncs.pdf
+
+xlattice kademlia specification
+http://xlattice.sourceforge.net/components/protocol/kademlia/specs.html
+
+impriving lookup performance over kademlia
+http://www.barsoom.org/papers/infocom-2006-kad.pdf
+
+Prefix hash tree (indexing on a dht)
+http://berkeley.intel-research.net/sylvia/pht.pdf
+
+dht links
+http://deim.urv.cat/~cpairot/dhts.html
+
+Sybil proof 1-hop DHT
+http://pdos.csail.mit.edu/papers/sybil-dht-socialnets08.pdf
+
+A survey of DHT security techniques
+http://www.globule.org/publi/SDST_acmcs2009.html
